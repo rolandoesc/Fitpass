@@ -1,0 +1,32 @@
+<div class="container-fluid" id="wrapper">
+  <div class="row">
+    <div class="col-lg-12">
+      <img src="https://www.fitpass.mx/assets/1525715016-1658978-269x195-FIRPASSLOGO.png" alt="Fitpass" class="img-fluid d-block mx-auto">
+      <br>
+      <h1 class="text-center">
+        Fitpass Phone and Number Verifier
+      </h1>
+      <p class="text-center">Please, provide an email or phone number to check availability.</p>
+    </div>
+    <div class="col-lg-4 offset-lg-5">
+      <form action="">
+        
+        <div class="form-group">
+          <select name="options" [(ngModel)]='type'>
+            <option value="email"  name='email' selected>📩 Email</option> 
+            <option value="phone"  name='phone'>📲 Phone</option>
+          </select>
+          <input type="text" id='field' [(ngModel)]='value' name="value" required>
+
+        </div>
+      
+        <button class="btn btn-success" id="submit" (click)="onSubmit()">Check Availability</button>
+        <button class="btn btn-primary" id="reset" (click)="onReset()">Reset Fields</button>
+        <br>
+        
+      </form>        
+  </div>
+  <div ng-if="result" class="col-lg-12">
+    <p class="text-center" id='small'>{{result}}</p>
+  </div>
+</div>
