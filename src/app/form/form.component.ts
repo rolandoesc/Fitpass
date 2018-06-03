@@ -18,23 +18,30 @@ export class FormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.value);
-    console.log(this.type);
+
     if (!this.type) {
       this.result = 'Please, choose a type of validation in order to use this tool.';
     } else if (!this.value) {
-      this.result = 'Please, add a value in order to check availability.'
+      this.result = 'Please, add a value in order to check availability.';
     } else {
-      this.http.get(this.url + this.type + '=' + this.value).subscribe(data => {
-        const d:any = data;
-        console.log(data);
-        if (!d.registered) {
-          this.result = `The ${this.type} '${this.value}' can be used for registration. 😃`
-        } else if (d.registered) {
-          this.result = `The ${this.type} '${this.value}' has been already registered. Please use another one. 😔`
-        }
-  
-      });
+      if (this.type === 'email' && this.value.indexOf('@') === -1) {
+        this.result = 'Please, provide a proper email to verify.';
+      } else if (this.type === 'phone' && isNaN(parseInt(this.value))) {
+        this.result = 'Please, provide a proper phone number to verify.';
+      } else {
+        this.http.get(this.url + this.type + '=' + this.value).subscribe(data => {
+          const d:any = data;
+
+          if (!d.registered) {
+            this.result = `The ${this.type} '${this.value}' can be used for registration. 😃`
+          } else if (d.registered) {
+            this.result = `The ${this.type} '${this.value}' has been already registered. Please use another one. 😔`
+          }
+
+        });
+
+      }
+      
     }
     
     return false;
