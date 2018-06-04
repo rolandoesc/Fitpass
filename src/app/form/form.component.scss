@@ -3,4 +3,19 @@
   #small {
     font-size: 95%;
   }
+  select {
+    border-radius: 3px;
+    height: 2.9vh;
+    background-color: #ffffff;
+  }
+  input {
+    border-radius: 3px;
+    border-style: solid #252525;
+    border-width: 1px;
+  }
+  ::placeholder {
+    letter-spacing: 1px;
+    text-align: center;
+    font-style: oblique;
+  }
 }
